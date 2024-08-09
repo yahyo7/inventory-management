@@ -9,8 +9,7 @@ const CardPopularProducts = () => {
     isLoading,
     error,
   } = useGetDashboardMetricsQuery();
-  console.log("Fetch error:", error);
-  console.log(dashboardMetrics);
+  
   return (
     <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl pb-16">
       {isLoading ? (
