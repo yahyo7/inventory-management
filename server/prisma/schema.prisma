@@ -48,3 +48,40 @@ model Purchases {
   totalCost  Float
   product    Products @relation(fields: [productId], references: [productId])
 }
+
+model Expenses {
+  expenseId String   @id
+  category  String
+  amount    Float
+  timestamp DateTime
+}
+
+model SalesSummary {
+  salesSummaryId   String   @id
+  totalValue       Float
+  changePercentage Float?
+  date             DateTime
+}
+
+model PurchaseSummary {
+  purchaseSummaryId String   @id
+  totalPurchased    Float
+  changePercentage  Float?
+  date              DateTime
+}
+
+model ExpenseSummary {
+  expenseSummaryId  String              @id
+  totalExpenses     Float
+  date              DateTime
+  ExpenseByCategory ExpenseByCategory[]
+}
+
+model ExpenseByCategory {
+  expenseByCategoryId String         @id
+  expenseSummaryId    String
+  category            String
+  amount              BigInt
+  date                DateTime
+  expenseSummary      ExpenseSummary @relation(fields: [expenseSummaryId], references: [expenseSummaryId])
+}
