@@ -8,10 +8,18 @@ export interface Product {
   stockQuantity: number;
 }
 
+export interface NewProduct {
+  name: string;
+  price: number;
+  rating?: number;
+  stockQuantity: number;
+}
+
 export interface SalesSummary {
-  productId: string;
-  productName: string;
-  totalSales: number;
+  salesSummaryId: string;
+  totalValue: number;
+  changePercentage?: number;
+  date: string;
 }
 
 export interface PurchaseSummary {
@@ -29,9 +37,8 @@ export interface ExpenseSummary {
 
 export interface ExpenseByCategorySummary {
   expenseByCategorySummaryId: string;
-  expenseSummaryId: string;
   category: string;
-  amount: bigint;
+  amount: string;
   date: string;
 }
 
@@ -41,6 +48,12 @@ export interface DashboardMetrics {
   purchaseSummary: PurchaseSummary[];
   expenseSummary: ExpenseSummary[];
   expenseByCategorySummary: ExpenseByCategorySummary[];
+}
+
+export interface User {
+  userId: string;
+  name: string;
+  email: string;
 }
 
 export const api = createApi({

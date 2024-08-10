@@ -1,16 +1,24 @@
 import { useGetDashboardMetricsQuery } from "@/state/api";
-import React from "react";
-import numeral from "numeral";
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import numeral from "numeral";
+import React from "react";
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const CardPurchaseSummary = () => {
   const { data, isLoading } = useGetDashboardMetricsQuery();
   const purchaseData = data?.purchaseSummary || [];
 
   const lastDataPoint = purchaseData[purchaseData.length - 1] || null;
+
   return (
-    <div className="flex flex-col justify-between row-span-2 xs:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-white shadow-md rounded-2xl">
+    <div className="flex flex-col justify-between row-span-2 xl:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-white shadow-md rounded-2xl">
       {isLoading ? (
         <div className="m-5">Loading...</div>
       ) : (
@@ -22,9 +30,10 @@ const CardPurchaseSummary = () => {
             </h2>
             <hr />
           </div>
+
           {/* BODY */}
           <div>
-            {/* body header */}
+            {/* BODY HEADER */}
             <div className="mb-4 mt-7 px-7">
               <p className="text-xs text-gray-400">Purchased</p>
               <div className="flex items-center">
@@ -52,21 +61,13 @@ const CardPurchaseSummary = () => {
               </div>
             </div>
             {/* CHART */}
-            <ResponsiveContainer width="100%" height={350} className="px-7">
+            <ResponsiveContainer width="100%" height={200} className="p-2">
               <AreaChart
                 data={purchaseData}
-                margin={{ top: 0, right: 0, left: -50, bottom: 45 }}
+                margin={{ top: 0, right: 0, left: -50, bottom: 65 }}
               >
-                <XAxis
-                  dataKey="date"
-                  tick={false}
-                  axisLine={false}
-                />
-                <YAxis
-                tickLine={false}
-                  tick={false}
-                  axisLine={false}
-                />
+                <XAxis dataKey="date" tick={false} axisLine={false} />
+                <YAxis tickLine={false} tick={false} axisLine={false} />
                 <Tooltip
                   formatter={(value: number) => [
                     `$${value.toLocaleString("en")}`,
@@ -79,7 +80,6 @@ const CardPurchaseSummary = () => {
                       day: "numeric",
                     });
                   }}
-                  
                 />
                 <Area
                   type="linear"
